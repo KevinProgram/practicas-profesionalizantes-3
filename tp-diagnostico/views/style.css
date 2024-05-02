@@ -1,0 +1,36 @@
+label
+{
+    font-size: 20px;
+    text-align: left;
+    
+}
+
+body
+{
+    background-color: #862394;
+    background-image: url('https://s0.smartresize.com/wallpaper/815/514/HD-wallpaper-dark-brown-wooden-texture-dark-brown-wooden-background-red-wood-texture-natural-materials-texture.jpg');
+    background-size: 100%
+}
+
+input
+{
+    background-color: #7d67a3;
+    text-align: left;
+    color:lightsalmon;
+}
+
+h1
+{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+fieldset
+{
+    background-color: #3C1B0E;
+}
+
+p
+{
+    color:ghostwhite;
+}

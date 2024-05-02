@@ -1,0 +1,28 @@
+label
+{
+    font-size: 20px;
+    text-align: center;
+}
+
+body
+{
+    background-color: #1452d0;
+    text-align: center;
+}
+
+input
+{
+    background-color: #5627a7;
+}
+
+button
+{
+    background-color: #a9c3f7;
+}
+
+p
+{
+    
+    font-size: 200px;
+    text-align: center;
+}
