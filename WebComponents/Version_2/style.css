@@ -1,0 +1,16 @@
+body
+{
+    background-color: #4da5ce70;
+}
+
+table,td,th,tr
+    {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+.column
+{
+    font-weight: bold;
+}
+

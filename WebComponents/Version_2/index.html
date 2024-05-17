@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>WebComponent</title>
+</head>
+<body>
+  
+</body>
+
+
+<script>
+
+    let _cuentas = [
+    {
+      "id": 1,
+      "username": "IronMan92",
+      "saldo": "$100.50"
+    },
+    {
+      "id": 2,
+      "username": "LunaGamer77",
+      "saldo": "$75.25"
+    },
+    {
+      "id": 3,
+      "username": "ShadowNinja123",
+      "saldo": "$200.00"
+    },
+    {
+      "id": 4,
+      "username": "DragonMasterX",
+      "saldo": "$50.75"
+    },
+    {
+      "id": 5,
+      "username": "SpaceExplorer99",
+      "saldo": "$300.30"
+    },
+    {
+      "id": 6,
+      "username": "PixelWizard",
+      "saldo": "$150.00"
+    },
+    {
+      "id": 7,
+      "username": "MysterySeeker",
+      "saldo": "$80.60"
+    },
+    {
+      "id": 8,
+      "username": "EternalDreamer",
+      "saldo": "$400.20"
+    },
+    {
+      "id": 9,
+      "username": "SunnySideUp",
+      "saldo": "$10.00"
+    },
+    {
+      "id": 10,
+      "username": "NeonPhantom",
+      "saldo": "$50.00"
+    },
+    {
+      "id": 11,
+      "username": "CyberPunk99",
+      "saldo": "$125.75"
+    },
+    {
+      "id": 12,
+      "username": "GalacticTraveler",
+      "saldo": "$275.50"
+    },
+    {
+      "id": 13,
+      "username": "TechWizard",
+      "saldo": "$90.25"
+    },
+    {
+      "id": 14,
+      "username": "MysticMage",
+      "saldo": "$180.00"
+    },
+    {
+      "id": 15,
+      "username": "SamuraiWarrior",
+      "saldo": "$200.60"
+    },
+    {
+      "id": 16,
+      "username": "StealthyAssassin",
+      "saldo": "$450.20"
+    },
+    {
+      "id": 17,
+      "username": "CosmicExplorer",
+      "saldo": "$15.00"
+    },
+    {
+      "id": 18,
+      "username": "DreamCatcher",
+      "saldo": "$75.00"
+    },
+    {
+      "id": 19,
+      "username": "ArcaneSorcerer",
+      "saldo": "$300.00"
+    },
+    {
+      "id": 20,
+      "username": "StarStrider",
+      "saldo": "$500.00"
+    },
+    {
+      "id": 21,
+      "username": "NeoGamer",
+      "saldo": "$110.00"
+    },
+    {
+      "id": 22,
+      "username": "TechNinja",
+      "saldo": "$95.50"
+    },
+    {
+      "id": 23,
+      "username": "GalacticHero",
+      "saldo": "$700.75"
+    },
+    {
+      "id": 24,
+      "username": "DreamWalker",
+      "saldo": "$250.25"
+    },
+    {
+      "id": 25,
+      "username": "CyberMage",
+      "saldo": "$180.80"
+    },
+    {
+      "id": 26,
+      "username": "SpacePilot",
+      "saldo": "$600.00"
+    },
+    {
+      "id": 27,
+      "username": "TechSavvy",
+      "saldo": "$50.50"
+    },
+    {
+      "id": 28,
+      "username": "VirtualWarrior",
+      "saldo": "$175.00"
+    },
+    {
+      "id": 29,
+      "username": "DigitalNomad",
+      "saldo": "$125.20"
+    },
+    {
+      "id": 30,
+      "username": "PixelPioneer",
+      "saldo": "$300.40"
+    }
+    ]
+    
+    class CustomSelector extends HTMLElement
+    {
+        constructor()
+        {
+            super();
+            
+            this._title = document.createElement('h2');
+            this._title.innerText = 'Selecciona tu opción:';
+            
+            this._select = document.createElement('select');
+
+
+            // Crear los elementos/objetos de la UI
+            this._title = document.createElement('h2');
+            this._selectActionSubtitle = document.createElement('h3');
+            this._listActionButton = document.createElement('button');
+            this._createActionButton = document.createElement('button');
+            this._editActionButton = document.createElement('button');
+            this._deleteActionButton = document.createElement('button');
+
+            this._customActionSelector = document.createElement('select');
+            this._customActionOption = document.createElement('option');
+            this._exportActionOption = document.createElement('option');
+
+            this._listTableSubtitle = document.createElement('h4');
+
+
+            this._content = document.createElement('p');
+            
+
+            this._dataTable = document.createElement('table');
+            let _tableHeaderRow = this._dataTable.createTHead().insertRow();
+            let _tableColumnId = _tableHeaderRow.insertCell();
+            let _tableColumnUsername = _tableHeaderRow.insertCell();
+            let _tableColumnSaldo = _tableHeaderRow.insertCell();
+
+
+            // Configurar los elementos/objetos
+            this._title.innerText = 'Gestión de cuentas';
+            this._selectActionSubtitle.innerText = 'Seleccione una acción';
+
+            this._listActionButton.innerText = 'Listar';
+            this._createActionButton.innerText = 'Crear';
+            this._editActionButton.innerText = 'Editar';
+            this._deleteActionButton.innerText = 'Borrar';
+
+            this._customActionOption.value = "";
+            this._customActionOption.text = "...";
+            this._exportActionOption.value = "";
+    		this._exportActionOption.text = "Exportar como CSV";
+
+            //this._customActionSelector.innerText = '...';
+
+            this._listTableSubtitle.innerText = 'Listado de usuarios';
+            _tableColumnId.innerText = 'ID';
+            _tableColumnUsername.innerText = 'Username';
+            _tableColumnSaldo.innerText = 'Saldo';
+
+            /*Estilización*/
+            _tableColumnId.classList.add('column');
+            _tableColumnUsername.classList.add('column');
+            _tableColumnSaldo.classList.add('column');
+
+            /*Disposición de elementos de la interfaz (UI) (Layouting)*/
+            this.appendChild(this._title);
+            this.appendChild(this._selectActionSubtitle);
+            this.appendChild(this._listActionButton);
+            this.appendChild(this._createActionButton);
+            this.appendChild(this._editActionButton);
+            this.appendChild(this._deleteActionButton );
+            this.appendChild(this._customActionSelector);
+            this.appendChild(this._listTableSubtitle);
+
+            
+            this.appendChild(this._dataTable);	
+            
+            this.appendChild(this._content);
+
+        }
+
+        onCreateButton(event)
+        {  
+            let _id = prompt('Ingrese el ID')
+            let _username = prompt('Ingrese el username')
+            let _saldo = prompt('Ingrese el saldo')
+            
+            console.log( { id: _id, username: _username, saldo: _saldo})
+
+            const newUser = {
+              "id": _id,
+              "username": _username,
+              "saldo": _saldo
+            }
+
+            _cuentas.push(newUser)
+        };
+        
+        onDeleteButtonClick(event)
+        {
+          let variable12 = prompt('Ingrese el ID que quiere eliminar')
+           
+            const resultado2 = _cuentas.find((foundId) => foundId.id == variable12);
+            
+            console.log(resultado2);
+
+            _cuentas.splice(variable12 - 1, 1)
+
+            alert('El user ha sido eliminado')
+
+        }
+        
+        onEditButtonClick(event)
+        {
+            let variable15 = prompt('Ingrese el ID que quiere eliminar')
+            
+            
+            const resultado = _cuentas.find((foundId) => foundId.id == variable15);
+            
+            console.log(resultado); // { nombre: 'cerezas', cantidad: 5 }
+
+            let variable16 = prompt('Ingrese el nuevo username')
+            let variable17 = prompt('Ingrese el nuevo saldo')
+
+            resultado.username = variable16
+            resultado.saldo = variable17
+
+            console.log(resultado);
+        }
+        
+        onListButton(event)
+        {
+          this._content.textContent = JSON.stringify(_cuentas)
+
+          for (let user of _cuentas)
+          {
+            console.log( user )
+          }
+        }
+        connectedCallback()
+        {
+            //this.appendChild( this._title );
+            //this.appendChild( this._select );
+
+            this._createActionButton.onclick = this.onCreateButton.bind(this);
+            this._deleteActionButton.onclick = this.onDeleteButtonClick.bind(this);
+            this._editActionButton.onclick = this.onEditButtonClick.bind(this);
+            //this._listActionButton.onclick = this.onListButton.bind(this); // Kevin, recuerda ésto. ".bind(this)" hace que se utilice dentro del contexto de la misma función.
+            this._listActionButton.onclick = () => { this.onListButton() }
+        }
+
+        disconnectedCallback()
+        {
+            //Se ejecuta cuando el elemento gráfico es retirado del nodo que lo representa.
+            //Vuelve a estar desconectado de la recepción de eventos.
+        }
+        
+        adoptedCallback()
+        {
+            //Se ejecuta sólo cuando el objeto es movido de "proceso" o de "pestaña"
+        }
+        
+        attributesChangedCallback( oldValue, newValue )
+        {
+            //Se utiliza sólo para personalizar el comportamiento ante cambios en los valores de los atributos
+            //que se definen en la propiedad observableAttributes()
+        }
+
+        static observableAttributes()
+        {
+            return [];
+        }
+
+        /*
+        fillWith (data)
+        {
+            this._select.innerHTML = '';
+            
+            for( let dataItem of data )
+            {
+                const item = document.createElement('option');
+                item.value = dataItem.id;
+                item.text = dataItem.value;
+                
+                this._select.add(item);
+            }
+        }
+        */
+
+
+    }
+
+    customElements.define( 'x-custom-selector', CustomSelector );
+
+    let mySelector = new CustomSelector();
+    document.body.appendChild(mySelector);
+
+
+
+
+    //document.createElement('x-custom-selector');
+
+    //const dataFromServer = '[{"id":"1","value":"Perro"},{"id":"2","value":"Gato"},{"id":"3","value":"Lobo"}]';
+    
+    /*
+    function fetchData() {
+        fetch('cuentas.json')
+
+
+        
+        .then(response => response.json())
+        .then(data => {
+            
+            accountsData = data.cuetas
+            mySelector.fillWith(accountsData)
+        })
+        
+        
+    }
+
+    //mySelector.fillWith( JSON.parse( dataFromServer ) );
+
+    
+    mySelector.addEventListener('change', (event) => 
+    { 
+        const _mySelector = event.target;
+        const _optionData = 
+        { 
+            id: _mySelector.item( _mySelector.selectedIndex ).value,
+            value: _mySelector.item( _mySelector.selectedIndex ).text
+        }
+        
+        console.log( _optionData );
+    });
+    */
+    
+    
+
+    //document.getElementById("listar").onclick = fetchData;
+
+    //fetch('./backend/test.php', { method:'post', body: JSON.stringify(args) } ).then( response=> response.json() );
+
+</script>
+
+
+</html>

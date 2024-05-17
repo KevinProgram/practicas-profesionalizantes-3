@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>WebComponent</title>
+</head>
+<body>
+    <h1>Gestión de cuentas</h1>
+
+    <h2>Seleccione una acción</h2>
+        
+    <!--
+        <table> para crear la tabla, <tr> para crear cada fila y <td> para crear cada columna
+    -->
+
+      
+        <button>Listar</button>
+        <button>Crear</button>
+        <button>Editar</button>
+        <button>Eliminar</button>
+
+        <br>
+        <br>
+
+        <table>
+            <tr>
+              <td><strong>ID</strong></td>
+              <td><strong>Username</strong></td>
+              <td><strong>Saldo</strong></td>
+            </tr>
+             
+            <tr>
+              <td>CSS</td>
+              <td>20</td>
+              <td>16:00 - 20:00</td>
+            </tr>
+             
+            <tr>
+              <td>HTML</td>
+              <td>20</td>
+              <td>16:00 - 20:00</td>
+            </tr>
+             
+            <tr>
+              <td>Dreamweaver</td>
+              <td>60</td>
+              <td>16:00 - 20:00</td>
+            </tr>
+        </table>
+
+</body>
+
+
+<script>
+    class CustomSelector extends HTMLElement
+    {
+        constructor()
+        {
+            super();
+            
+            this._title = document.createElement('h2');
+            //this._title.innerText = 'Selecciona tu opción:';
+            
+            this._select = document.createElement('select');
+        }
+
+        fillWith (data)
+        {
+            this._select.innerHTML = '';
+            
+            for( let dataItem of data )
+            {
+                const item = document.createElement('option');
+                item.value = dataItem.id;
+                item.text = dataItem.value;
+                
+                this._select.add(item);
+
+                
+                //const tableRow = this._table.insertRow();
+
+                //const idCell = document.createElement('td');
+                //const usernameCell = document.createElement('td');
+                //const saldoCell = document.createElement('td');
+
+                //idCell.innerText = dataItem.id;
+                //usernameCell.innerText = dataItem.username;
+                //saldoCell.innerText = dataItem.saldo;
+
+                //tableRow.appendChild(idCell);
+                //tableRow.appendChild(usernameCell);
+                //tableRow.appendChild(saldoCell);
+
+                //this._tableBody.appendChild(tableRow);
+            }
+        }
+
+        connectedCallback()
+        {
+            this.appendChild( this._title );
+            this.appendChild( this._select );
+        }
+
+
+
+        disconnectedCallback()
+        {
+            //Se ejecuta cuando el elemento gráfico es retirado del nodo que lo representa.
+            //Vuelve a estar desconectado de la recepción de eventos.
+        }
+        
+        adoptedCallback()
+        {
+            //Se ejecuta sólo cuando el objeto es movido de "proceso" o de "pestaña"
+        }
+        
+        attributesChangedCallback( oldValue, newValue )
+        {
+            //Se utiliza sólo para personalizar el comportamiento ante cambios en los valores de los atributos
+            //que se definen en la propiedad observableAttributes()
+        }
+
+
+
+        static get observableAttributes()
+        {
+            return ["value"];
+        }
+
+    }
+
+    customElements.define( 'x-custom-selector', CustomSelector );
+
+    let mySelector = new CustomSelector();
+    
+    const dataFromServer = '[{"id":"1","value":"Perro"},{"id":"2","value":"Gato"},{"id":"3","value":"Lobo"}]';
+
+    function fetchData() {
+        fetch('cuentas.json')
+        .then(response => response.json())
+        .then(data => {
+            
+            accountsData = data.cuetas
+            mySelector.fillWith(accountsData)
+        })
+    }
+
+
+    mySelector.fillWith( JSON.parse( dataFromServer ) );
+
+    mySelector.addEventListener('change', (event) => 
+    { 
+        const _mySelector = event.target;
+        const _optionData = 
+        { 
+            id: _mySelector.item( _mySelector.selectedIndex ).value,
+            value: _mySelector.item( _mySelector.selectedIndex ).text
+        }
+        
+        console.log( _optionData );
+    });
+
+    document.body.appendChild(mySelector);
+    
+    //document.getElementById("listar").onclick = fetchData;
+
+
+
+
+</script>
+
+
+</html>
