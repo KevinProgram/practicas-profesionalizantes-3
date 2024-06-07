@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<!--
+	HTML/CSS/JS Calculator to MVC WebComponent Migration Exercise
+	Example code for ISFT151 for Educational Purposes
+	Prácticas Profesionalizantes III
+
+	Copyright 2021-2024 mgsantiago <mgsantiago@protonmail.com>
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+	MA 02110-1301, USA.
+
+
+-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>MVC WebComponent Activity</title>
+</head>
+
+
+<body></body>
+
+
+<style>
+	.numberButton
+	{
+		background-color: blue;
+		color: #FFFFFF;
+		border-color: #FFFFFF;
+		border-radius: 6px;
+		width: 100%;
+	}
+	
+	.operatorButton
+	{
+		background-color: #00FF04;
+		color: #FFFFFF;
+		border-color: #FFFFFF;
+		border-radius: 6px;
+		width: 100%;
+	}
+	
+	.clearButton
+	{
+		background-color: #FF0000;
+		color: #FFFFFF;
+		border-color: #FFFFFF;
+		width: 100%;
+		border-radius: 6px;
+	}
+	
+	.calculateButton
+	{
+		background-color: #FFB900;
+		color: #FFFFFF;
+		border-color: #FFFFFF;
+		width: 100%;
+		border-radius: 6px;
+	}
+	
+	.displayResult
+	{
+		border-radius: 6px;
+	}
+
+</style>
+
+
+<script> 
+	
+	class WCView extends HTMLElement
+	{
+		constructor()
+		{
+			super();
+
+			/*Creamos los elementos/objetos de la UI (User Interface)*/
+			
+
+			this._display = document.createElement('input');
+
+			this._buttonZero = document.createElement('button');
+			this._buttonOne = document.createElement('button');
+			this._buttonTwo = document.createElement('button');
+			this._buttonThree = document.createElement('button');
+			this._buttonFour = document.createElement('button');
+			this._buttonFive = document.createElement('button');
+			this._buttonSix = document.createElement('button');
+			this._buttonSeven = document.createElement('button');
+			this._buttonEight = document.createElement('button');
+			this._buttonNine = document.createElement('button');
+
+			this._plusButton = document.createElement('button');
+			this._minusButton = document.createElement('button');
+			this._productButton = document.createElement('button');
+			this._divisionButton = document.createElement('button');
+			
+			this._dotButton = document.createElement('button');
+			this._calculateButton = document.createElement('button');
+			this._clearButton = document.createElement('button');
+
+			
+
+					
+			this._dataTable = document.createElement('table');
+			let _tableHeaderRow = this._dataTable.createTHead().insertRow();
+			let _tableColumn1 = _tableHeaderRow.insertCell();
+			let _tableColumn2 = _tableHeaderRow.insertCell();
+			let _tableColumn3 = _tableHeaderRow.insertCell();
+
+			/*Configurar los elementos/objetos*/
+
+
+			this._buttonZero.innerText = '0';
+			this._buttonOne.innerText = '1';
+			this._buttonTwo.innerText = '2';
+			this._buttonThree.innerText = '3';
+			this._buttonFour.innerText = '4';
+			this._buttonFive.innerText = '5';
+			this._buttonSix.innerText = '6';
+			this._buttonSeven.innerText = '7';
+			this._buttonEight.innerText = '8';
+			this._buttonNine.innerText = '9';
+
+
+			this._plusButton.innerText = '+';
+			this._minusButton.innerText = '-';
+			this._productButton.innerText = '*';
+			this._divisionButton.innerText = '/';
+			
+			this._dotButton.innerText = '.';
+			this._calculateButton.innerText = '=';
+			this._clearButton.innerText = 'Clear';
+
+
+
+
+			/*Estilización*/
+			
+			/*Disposición de elementos de la interfaz (UI) (Layouting)*/
+
+			
+			this.appendChild(this._buttonZero);
+			this.appendChild(this._buttonOne);
+			this.appendChild(this._buttonTwo);
+			this.appendChild(this._buttonThree);
+			this.appendChild(this._buttonFour);
+			this.appendChild(this._buttonFive);
+			this.appendChild(this._buttonSix);
+			this.appendChild(this._buttonSeven);
+			this.appendChild(this._buttonEight);
+			this.appendChild(this._buttonNine);
+
+			this.appendChild(this._display);
+
+			this.appendChild(this._plusButton);
+			this.appendChild(this._minusButton);
+			this.appendChild(this._productButton);
+			this.appendChild(this._divisionButton);
+
+			this.appendChild(this._dotButton);
+			this.appendChild(this._calculateButton);
+			this.appendChild(this._clearButton);
+
+			this.appendChild(this._dataTable);		
+		}
+
+		onButton0Click(event)
+		{
+			this._display.value += '0';
+		}
+
+		onButton1Click(event)
+		{   	
+			this._display.value += '1';
+		}
+
+		onButton2Click(event)
+		{   	
+			this._display.value += '2';
+		}
+
+		onButton3Click(event)
+		{   	
+			this._display.value += '3';
+		}
+
+		onButton4Click(event)
+		{   	
+			this._display.value += '4';
+		}
+
+		onButton5Click(event)
+		{   	
+			this._display.value += '5';
+		}
+
+		onButton6Click(event)
+		{   	
+			this._display.value += '6';
+		}
+
+		onButton7Click(event)
+		{   	
+			this._display.value += '7';
+		}
+
+		onButton8Click(event)
+		{   	
+			this._display.value += '8';
+		}
+		
+		onButton9Click(event)
+		{   	
+			this._display.value += '9';
+		}
+		
+		onButtonDotClick(event)
+		{   	
+			this._display.value += '.';
+		}
+
+		
+
+
+		onButtonPlusClick(event)
+		{
+			this._display.value += '+';
+		}
+
+		onButtonMinusClick(event)
+		{
+			this._display.value += '-';
+		}
+
+		onButtonProductClick(event)
+		{
+			this._display.value += '*';
+		}
+
+		onButtonDivisionClick(event)
+		{
+			this._display.value += '/';
+		}
+		
+		onButtonCalculateClick(event)
+		{
+			this._display.value = eval(this._display.value);
+		}
+
+		onButtonClearClick(event)
+		{
+			this._display.value = null;
+		}
+
+
+		connectedCallback()
+		{
+			this._buttonZero.onclick = this.onButton0Click.bind(this);
+			this._buttonOne.onclick = this.onButton1Click.bind(this);
+			this._buttonTwo.onclick = this.onButton2Click.bind(this);
+			this._buttonThree.onclick = this.onButton3Click.bind(this);
+			this._buttonFour.onclick = this.onButton4Click.bind(this);
+			this._buttonFive.onclick = this.onButton5Click.bind(this);
+			this._buttonSix.onclick = this.onButton6Click.bind(this);
+			this._buttonSeven.onclick = this.onButton7Click.bind(this);
+			this._buttonEight.onclick = this.onButton8Click.bind(this);
+			this._buttonNine.onclick = this.onButton9Click.bind(this);
+
+			this._dotButton.onclick = this.onButtonDotClick.bind(this);
+
+			this._plusButton.onclick = this.onButtonPlusClick.bind(this);
+			this._minusButton.onclick = this.onButtonMinusClick.bind(this);
+			this._productButton.onclick = this.onButtonProductClick.bind(this);
+			this._divisionButton.onclick = this.onButtonDivisionClick.bind(this);
+			this._calculateButton.onclick = this.onButtonCalculateClick.bind(this);
+			this._clearButton.onclick = this.onButtonClearClick.bind(this);
+		}
+
+		disconnectedCallback()
+		{
+
+		}
+
+		adoptedCallback()
+		{
+
+		}
+
+		attributeChangedCallback(oldValue, newValue)
+		{
+
+		}
+
+		static observableAttributes()
+		{
+			return [];
+		}
+	}
+
+
+	customElements.define('wc-viewx', WCView );
+
+		let myCalculator = new WCView();
+		document.body.appendChild(myCalculator);
+
+
+</script>
+</html>
