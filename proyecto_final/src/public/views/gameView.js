@@ -32,8 +32,7 @@ class GameView extends HTMLElement {
         this.canvas.width = 1800;
         this.canvas.height = 800;
         
-        // To do Definir tamanio del canvas.
-        this.renderView("combat");
+        this.renderView("login");
 
         this.rectangles = [
             // Outer walls
@@ -42,7 +41,7 @@ class GameView extends HTMLElement {
             { x: 0, y: 0, width: 20, height: this.canvas.height },
             { x: this.canvas.width - 20, y: 0, width: 20, height: this.canvas.height },
 
-            // Vertical Walls
+            // Horizontal Walls
             { x: 0, y: 150, width: this.canvas.width - 200, height: 20 },
             { x: 210, y: 350, width: 200, height: 20 },
             { x: 0, y: 450, width: 200, height: 20 },
@@ -94,8 +93,8 @@ class GameView extends HTMLElement {
     drawRectangles(drawingContext)
     {
         this.rectangles.forEach(rect => {
-            drawingContext.fillStyle = 'black'; // Wall color
-            drawingContext.fillRect(rect.x, rect.y, rect.width, rect.height); // Draw each wall
+            drawingContext.fillStyle = 'black';
+            drawingContext.fillRect(rect.x, rect.y, rect.width, rect.height);
         });
     }
 
@@ -108,7 +107,7 @@ class GameView extends HTMLElement {
                 y < wall.y + wall.height &&
                 y + this.playerView.height > wall.y
             ) {
-                return true; // Collision detected
+                return true; // Collision
             }
         }
         return false; // No collision
@@ -143,8 +142,6 @@ class GameView extends HTMLElement {
                 object.width, // Ancho del cuadro
                 object.height // Alto del cuadro
             );
-    
-
     }
 
     update()
@@ -159,8 +156,6 @@ class GameView extends HTMLElement {
         }
         requestAnimationFrame(() => this.update());  
     }
-    
-
 }
 
 customElements.define('wc-gv', GameView);

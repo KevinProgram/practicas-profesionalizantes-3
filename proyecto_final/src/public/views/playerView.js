@@ -29,10 +29,10 @@ class playerView extends EventTarget
         this.frameIndex = 0; 
         
         //Número de fila que posee los cuadros
-        this.row = 0; 
+        this.row = 1; 
         
         //Velocidad de la animación
-        this.ticksPerFrame = 40; 
+        this.ticksPerFrame = 30; 
         
         //Tiempo transcurrido
         this.tickCount = 0;
